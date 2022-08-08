@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Reservations.Models;
 using Reservations.Exceptions;
+using Reservations.View_Models;
 
 namespace Reservations
 {
@@ -17,6 +18,13 @@ namespace Reservations
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel()
+            };
+
+            MainWindow.Show();
+
             base.OnStartup(e);
         }
     }
