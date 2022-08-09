@@ -6,17 +6,27 @@ using System.Threading.Tasks;
 using Reservations.Views;
 using Reservations.Models;
 using Reservations.View_Models;
+using Reservations.Stores;
 
 namespace Reservations.View_Models
 {
     public class MainViewModel : ViewModelBase
     {
-        public ViewModelBase CurrentViewModel { get; }
-
-        public MainViewModel(Hotel hotel)
+        private readonly NavigationStore _navigationStore;
+        
+        public MainViewModel(NavigationStore navigationStore)
         {
-            CurrentViewModel = new ReservationListingViewModel();
+            _navigationStore = navigationStore;
 
+
+            _navigationStore.CurrentviewModelChange += OnCurrentViewModelChanged;
         }
+
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel)); 
+        }
+
+        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
     }
 }

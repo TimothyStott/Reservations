@@ -1,5 +1,6 @@
 ﻿using Reservations.Commands;
 using Reservations.Models;
+using Reservations.Stores;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,11 +21,11 @@ namespace Reservations.View_Models
         public ICommand MakeReservationCommand { get; }
 
 
-        public ReservationListingViewModel()
+        public ReservationListingViewModel(NavigationStore navigationStore)
         {
             _reservations = new ObservableCollection<ReservationViewModel>();
 
-            MakeReservationCommand = new NavigateToCommand();
+            MakeReservationCommand = new NavigateToCommand(navigationStore);
 
 
             _reservations.Add(new ReservationViewModel(new Models.Reservation("SingletonSean", new RoomID(1, 2), DateTime.Now, DateTime.Now)));
