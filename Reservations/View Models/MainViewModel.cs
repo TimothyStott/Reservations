@@ -13,9 +13,10 @@ namespace Reservations.View_Models
     {
         public ViewModelBase CurrentViewModel { get; }
 
-        public MainViewModel()
+        public MainViewModel(Hotel hotel)
         {
-            CurrentViewModel = new MakeReservationViewModel();
+            CurrentViewModel = new ReservationListingViewModel();
+
         }
     }
 }
